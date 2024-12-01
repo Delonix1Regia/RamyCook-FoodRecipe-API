@@ -3,26 +3,33 @@ import 'package:flutter/material.dart';
 class CategoryTab extends StatelessWidget {
   final String text;
   final bool isSelected;
-  final VoidCallback onTap; // Tambahkan parameter onTap
+  final VoidCallback onTap;
 
   const CategoryTab({
     Key? key,
     required this.text,
     required this.isSelected,
-    required this.onTap, // Pastikan onTap diinisialisasi
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // Gunakan onTap ketika tab ditekan
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.orange : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? Colors.orange : Colors.white,
+          ),
+        ),
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? Colors.orange : Colors.white,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            color: isSelected ? Colors.black : Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

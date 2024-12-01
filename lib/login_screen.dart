@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:slicing_ui/main_menu.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'main_menu.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,15 +17,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String errorMessage = '';
 
-  void _login() {
-    // Username dan password yang valid (contoh sederhana)
-    String validUsername = 'user';
-    String validPassword = '123';
+  Future<void> _login() async {
+    const bool isDebugMode = true; // Set to false for production
 
-    String enteredUsername = _usernameController.text;
-    String enteredPassword = _passwordController.text;
+    if (isDebugMode) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MainMenu()),
+      );
+      return;
+    }
 
-    // Validasi input
+    // Perform usual login logic here
+    final String enteredUsername = _usernameController.text;
+    final String enteredPassword = _passwordController.text;
+
     if (enteredUsername.isEmpty || enteredPassword.isEmpty) {
       setState(() {
         errorMessage = 'Username and password are required';
@@ -30,23 +39,37 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    if (enteredUsername == validUsername && enteredPassword == validPassword) {
-      // Navigasi ke MainMenu jika berhasil
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const MainMenu()),
+    const String apiUrl = 'http://localhost:5000/users/login';
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'username': enteredUsername,
+          'password': enteredPassword,
+        }),
       );
-    } else {
-      // Jika gagal, tampilkan pesan error
+
+      if (response.statusCode == 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainMenu()),
+        );
+      } else {
+        setState(() {
+          errorMessage = 'Invalid username or password';
+        });
+      }
+    } catch (e) {
       setState(() {
-        errorMessage = 'Invalid username or password';
+        errorMessage = 'Failed to connect to the server';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Definisikan ukuran teks yang konsisten
     const double labelTextSize = 14.0;
 
     return Scaffold(
@@ -64,9 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 120,
-                  ),
+                  const SizedBox(height: 120),
                   Text(
                     'RamyCook',
                     style: TextStyle(
@@ -85,7 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  // Label Username
                   Text(
                     'Username',
                     style: TextStyle(
@@ -121,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Label Password
                   Text(
                     'Password',
                     style: TextStyle(
@@ -165,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 18),
-                  // Menampilkan pesan error jika ada
                   if (errorMessage.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
@@ -175,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ElevatedButton(
-                    onPressed: _login, // Memanggil fungsi _login untuk validasi
+                    onPressed: _login,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black,
