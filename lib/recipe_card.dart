@@ -15,22 +15,22 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white, // Set the background color to white
-      elevation: 4, // Optional: gives the card a shadow effect
+      color: Colors.white, 
+      elevation: 4, 
       shape: RoundedRectangleBorder(
         borderRadius:
-            BorderRadius.circular(10), // Optional: adds rounded corners
+            BorderRadius.circular(10), 
       ),
       child: InkWell(
         onTap: onTap,
         borderRadius:
-            BorderRadius.circular(10), // Match the card's border radius
+            BorderRadius.circular(10), 
         child: Stack(
           children: [
             // Display the image
             ClipRRect(
               borderRadius:
-                  BorderRadius.circular(10), // Match the card's border radius
+                  BorderRadius.circular(10), 
               child: Image.network(
                 imagePath,
                 width: double.infinity,
@@ -38,13 +38,12 @@ class RecipeCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            // Display the text over the image at the bottom left corner
             Positioned(
-              left: 8, // Padding from the left
-              bottom: 8, // Padding from the bottom
+              left: 8, 
+              bottom: 8, 
               child: Container(
                 color: Colors.black
-                    .withOpacity(0.8), // Semi-transparent background for text
+                    .withOpacity(0.8), 
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
                   title,
@@ -52,7 +51,7 @@ class RecipeCard extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors
-                        .white, // White text for contrast against the background
+                        .white, 
                   ),
                 ),
               ),

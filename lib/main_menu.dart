@@ -17,14 +17,12 @@ class _MainMenuState extends State<MainMenu> {
   bool isLoading = true;
   List<dynamic> recipes = [];
 
-  // Fungsi untuk mendapatkan resep berdasarkan kategori
   Future<void> fetchRecipes() async {
     setState(() {
       isLoading = true;
     });
 
     try {
-      // Ambil data sesuai kategori
       String query = currentCategory.toLowerCase();
       List<dynamic> data = await _apiService.getRecipes(query: query);
 
@@ -50,7 +48,7 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       currentCategory = category;
     });
-    fetchRecipes(); // Fetch ulang data saat kategori berubah
+    fetchRecipes(); 
   }
 
   @override

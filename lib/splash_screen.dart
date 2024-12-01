@@ -6,12 +6,12 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 6), () {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
             builder: (context) =>
-                const LoginScreen()), // Ganti dengan LoginScreen Anda
-        (Route<dynamic> route) => false, // Menghapus semua route sebelumnya
+                const LoginScreen()), 
+        (Route<dynamic> route) => false, 
       );
     });
     return Scaffold(

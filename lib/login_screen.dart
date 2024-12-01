@@ -18,17 +18,10 @@ class _LoginScreenState extends State<LoginScreen> {
   String errorMessage = '';
 
   Future<void> _login() async {
-    const bool isDebugMode = true; // Set to false for production
+// Tentukan username dan password yang valid
+    const String validUsername = 'user';
+    const String validPassword = '123';
 
-    if (isDebugMode) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MainMenu()),
-      );
-      return;
-    }
-
-    // Perform usual login logic here
     final String enteredUsername = _usernameController.text;
     final String enteredPassword = _passwordController.text;
 
@@ -39,33 +32,65 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    const String apiUrl = 'http://localhost:5000/users/login';
-
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: json.encode({
-          'username': enteredUsername,
-          'password': enteredPassword,
-        }),
+    if (enteredUsername == validUsername && enteredPassword == validPassword) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MainMenu()),
       );
-
-      if (response.statusCode == 200) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainMenu()),
-        );
-      } else {
-        setState(() {
-          errorMessage = 'Invalid username or password';
-        });
-      }
-    } catch (e) {
+    } else {
       setState(() {
-        errorMessage = 'Failed to connect to the server';
+        errorMessage = 'Invalid username or password';
       });
     }
+
+    // const bool isDebugMode = true; // Set to false for production
+
+    // if (isDebugMode) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => MainMenu()),
+    //   );
+    //   return;
+    // }
+
+    // Perform usual login logic here
+    // final String enteredUsername = _usernameController.text;
+    // final String enteredPassword = _passwordController.text;
+
+    // if (enteredUsername.isEmpty || enteredPassword.isEmpty) {
+    //   setState(() {
+    //     errorMessage = 'Username and password are required';
+    //   });
+    //   return;
+    // }
+
+    // const String apiUrl = 'http://localhost:5000/users/login';
+
+    // try {
+    //   final response = await http.post(
+    //     Uri.parse(apiUrl),
+    //     headers: {'Content-Type': 'application/json'},
+    //     body: json.encode({
+    //       'username': enteredUsername,
+    //       'password': enteredPassword,
+    //     }),
+    //   );
+
+    //   if (response.statusCode == 200) {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => MainMenu()),
+    //     );
+    //   } else {
+    //     setState(() {
+    //       errorMessage = 'Invalid username or password';
+    //     });
+    //   }
+    // } catch (e) {
+    //   setState(() {
+    //     errorMessage = 'Failed to connect to the server';
+    //   });
+    // }
   }
 
   @override
