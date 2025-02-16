@@ -1,16 +1,37 @@
-# slicing_ui
+# RamyCook-FoodRecipe API 
+RamyCook Food Recipe API merupakan aplikasi mobile berbasis Flutter (Dart) yang menggunakan API.
+API ini digunakan untuk melakukan pencarian berdasarkan kategori dan nama masakan.
+___
+## Fitur yang Tersedia
+- Mencari resep
+- Mengkategorikan resep
+- Integrasi API
+- Menampilkan resep
 
-A new Flutter project.
+## Tech Stack
+- Framework : Flutter (Dart)
+- UI Toolkit : Flutter Widget
+- State Management : setState
 
-## Getting Started
+## Instalasi dan Konfigurasi
+### 1. Clone Repository
+```sh
+git clone https://github.com/Delonix1Regia/RamyCook-FoodRecipe-API.git
+cd RamyCook-FoodRecipe-API
+```
+### 2. Install Dependencies
+```sh
+flutter pub get
+```
+### 3. Jalankan Aplikasi
+```sh
+flutter run
+```
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## API yang DIgunakan
+Dalam aplikasi RamyCook Food Recipe ini, API yang digunakan merupakan API eksternal yang menyediakan data resep makanan.
+## 🔗 API yang Digunakan
+Gunakan API eksternal yang menyediakan data resep makanan. Misalnya:
+```sh
+https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
+```
