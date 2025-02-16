@@ -9,9 +9,9 @@ ___
 - Menampilkan resep
 
 ## Tech Stack
-- Framework : Flutter (Dart)
-- UI Toolkit : Flutter Widget
-- State Management : setState
+- **Framework** : Flutter (Dart)
+- **UI Toolkit** : Flutter Widget
+- **State Management** : setState
 
 ## Instalasi dan Konfigurasi
 ### 1. Clone Repository
@@ -30,8 +30,6 @@ flutter run
 
 ## API yang DIgunakan
 Dalam aplikasi RamyCook Food Recipe ini, API yang digunakan merupakan API eksternal yang menyediakan data resep makanan.
-## 🔗 API yang Digunakan
-Gunakan API eksternal yang menyediakan data resep makanan. Misalnya:
 ```sh
 https://www.themealdb.com/api/json/v1/1/search.php?s=chicken
 ```
